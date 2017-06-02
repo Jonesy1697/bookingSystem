@@ -1,20 +1,13 @@
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
+ * An interface class for the system, this class contains navigating options around
+ * the system for the admin user.
+ * 
  * @author up772320
  */
 public class mainMenuAdmin extends javax.swing.JFrame {
@@ -23,20 +16,19 @@ public class mainMenuAdmin extends javax.swing.JFrame {
      * Creates new form mainMenu
      */
     
-    String host;
-    String uName;
-    String uPass;
-
-    Connection con;
-    Statement stmt;
     ResultSet rs;
     int curRow = 0;
-    int userID;
+    String userID;
     
     String authorisation;
     
-    public mainMenuAdmin( int tempID) throws SQLException {
-        
+    /**
+     *
+     * @param tempID temporarily holds the user ID until moved to a global variable
+     * @throws SQLException will identify an SQL error if/when one occurs
+     */
+    public mainMenuAdmin( String tempID) throws SQLException {
+                
         userID = tempID;
         authorisation = "a";
         
@@ -53,28 +45,17 @@ public class mainMenuAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnLogOut = new javax.swing.JButton();
+        jPanel11 = new javax.swing.JPanel();
         btnUserScreen = new javax.swing.JButton();
         btnRoomScreen = new javax.swing.JButton();
-        btnLogOut = new javax.swing.JButton();
-        btnUserScreen1 = new javax.swing.JButton();
         btnEditRooms = new javax.swing.JButton();
+        btnUserScreen1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Booking system");
 
-        btnUserScreen.setText("View users");
-        btnUserScreen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUserScreenActionPerformed(evt);
-            }
-        });
-
-        btnRoomScreen.setText("Make booking");
-        btnRoomScreen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRoomScreenActionPerformed(evt);
-            }
-        });
-
+        btnLogOut.setBackground(new java.awt.Color(0, 102, 255));
         btnLogOut.setText("Log out");
         btnLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,13 +63,25 @@ public class mainMenuAdmin extends javax.swing.JFrame {
             }
         });
 
-        btnUserScreen1.setText("My bookings");
-        btnUserScreen1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Main menu", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        btnUserScreen.setBackground(new java.awt.Color(0, 102, 255));
+        btnUserScreen.setText("View users");
+        btnUserScreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUserScreen1ActionPerformed(evt);
+                btnUserScreenActionPerformed(evt);
             }
         });
 
+        btnRoomScreen.setBackground(new java.awt.Color(0, 102, 255));
+        btnRoomScreen.setText("Make booking");
+        btnRoomScreen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRoomScreenActionPerformed(evt);
+            }
+        });
+
+        btnEditRooms.setBackground(new java.awt.Color(0, 102, 255));
         btnEditRooms.setText("Edit Rooms");
         btnEditRooms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,34 +89,36 @@ public class mainMenuAdmin extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        btnUserScreen1.setBackground(new java.awt.Color(0, 102, 255));
+        btnUserScreen1.setText("My bookings");
+        btnUserScreen1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserScreen1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLogOut, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnUserScreen)
+                .addComponent(btnUserScreen)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnEditRooms))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(btnRoomScreen)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(btnEditRooms))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnRoomScreen)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnUserScreen1)))))
-                .addContainerGap())
+                        .addComponent(btnUserScreen1))))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnLogOut)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRoomScreen)
                     .addComponent(btnUserScreen)
                     .addComponent(btnUserScreen1))
@@ -132,15 +127,38 @@ public class mainMenuAdmin extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnLogOut)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnLogOut)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUserScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreenActionPerformed
-         
+
+        this.dispose();
+        
         try {
             new adminScreen(userID).setVisible(true);
         } catch (SQLException ex) {
-            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(mainMenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
          
     }//GEN-LAST:event_btnUserScreenActionPerformed
@@ -149,8 +167,6 @@ public class mainMenuAdmin extends javax.swing.JFrame {
 
         try {
             new loginScreen().setVisible(true);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -162,10 +178,10 @@ public class mainMenuAdmin extends javax.swing.JFrame {
 
         try {
             new bookingScreen(userID, authorisation).setVisible(true);
-            this.dispose();
         } catch (SQLException ex) {
-            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(mainMenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.dispose();
         
         
         
@@ -173,8 +189,12 @@ public class mainMenuAdmin extends javax.swing.JFrame {
 
     private void btnUserScreen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreen1ActionPerformed
 
-        new myBookings(userID, authorisation).setVisible(true);
-        this.dispose();
+        try {
+            new myBookings(userID, authorisation).setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(mainMenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnUserScreen1ActionPerformed
 
@@ -182,10 +202,10 @@ public class mainMenuAdmin extends javax.swing.JFrame {
         
         try {
             new roomsScreen(userID).setVisible(true);
-            this.dispose();
         } catch (SQLException ex) {
-            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(mainMenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.dispose();
         
     }//GEN-LAST:event_btnEditRoomsActionPerformed
 
@@ -195,5 +215,6 @@ public class mainMenuAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnRoomScreen;
     private javax.swing.JButton btnUserScreen;
     private javax.swing.JButton btnUserScreen1;
+    private javax.swing.JPanel jPanel11;
     // End of variables declaration//GEN-END:variables
 }

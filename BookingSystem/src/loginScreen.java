@@ -1,56 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * An interface class for the system, this class contains logging into the system
+ * and also navigating to create a new user.
+ * 
  * @author Christopher
  */
 public class loginScreen extends javax.swing.JFrame {
 
-    String host;
-    String uName;
-    String uPass;
-
-    Connection con;
-    Statement stmt;
-    ResultSet rs;
-
+    databaseConnect connection;
+            
     /**
-     * Creates new form admin
+     * Creates new form admin 
+     * @throws java.sql.SQLException will identify an SQL error if/when one occurs
      */
-    public loginScreen() throws ClassNotFoundException, SQLException {
+    public loginScreen() throws SQLException {
 
-        initComponents();
-        doConnect();
+        if (connection == null){
+            connection = new databaseConnect(); 
+        }     
         
-    }
-    
-    private void doConnect() throws ClassNotFoundException, SQLException {
-
-        Class.forName("com.mysql.jdbc.Driver");
-
-        host = "jdbc:mysql://localhost/bookingsystem";
-        uName = "root";
-        uPass = "";
-
-        Connection con = DriverManager.getConnection(host, uName, uPass);
-        //This chunk accesses the database
-
-        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM user";
-        rs = stmt.executeQuery(SQL);
-        //This will access the table
+        initComponents();
+        
+        connection.getUsers();
+        
     }
 
     /**
@@ -62,70 +40,83 @@ public class loginScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        textPassword = new javax.swing.JPasswordField();
-        btnLogIn = new javax.swing.JButton();
+        jPanel11 = new javax.swing.JPanel();
         btnNewUser = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnLogIn = new javax.swing.JButton();
+        textPassword = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
-        spnID = new javax.swing.JSpinner();
+        userName = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Booking system");
 
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Login", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel11.setLayout(null);
+
+        btnNewUser.setBackground(new java.awt.Color(0, 102, 204));
+        btnNewUser.setText("New user?");
+        btnNewUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewUserActionPerformed(evt);
+            }
+        });
+        jPanel11.add(btnNewUser);
+        btnNewUser.setBounds(190, 360, 150, 40);
+
+        btnLogIn.setBackground(new java.awt.Color(0, 102, 204));
         btnLogIn.setText("Login");
         btnLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogInActionPerformed(evt);
             }
         });
+        jPanel11.add(btnLogIn);
+        btnLogIn.setBounds(20, 360, 150, 40);
 
-        btnNewUser.setText("New user");
-        btnNewUser.addActionListener(new java.awt.event.ActionListener() {
+        textPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewUserActionPerformed(evt);
+                textPasswordActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("ID:");
+        jPanel11.add(textPassword);
+        textPassword.setBounds(120, 260, 160, 30);
 
         jLabel2.setText("Password:");
+        jPanel11.add(jLabel2);
+        jLabel2.setBounds(50, 260, 80, 40);
 
-        spnID.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        userName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userNameActionPerformed(evt);
+            }
+        });
+        jPanel11.add(userName);
+        userName.setBounds(120, 220, 160, 30);
+
+        jLabel1.setText("User ID:");
+        jPanel11.add(jLabel1);
+        jLabel1.setBounds(60, 210, 50, 50);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/logo (2).png"))); // NOI18N
+        jPanel11.add(jLabel4);
+        jLabel4.setBounds(90, 20, 200, 160);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/720x1280-samsung-lg-nokia-wallpapers-mobile-21523leol.jpg"))); // NOI18N
+        jPanel11.add(jLabel3);
+        jLabel3.setBounds(0, 0, 360, 450);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnLogIn)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnNewUser))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(spnID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNewUser)
-                    .addComponent(btnLogIn))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
 
         pack();
@@ -135,14 +126,16 @@ public class loginScreen extends javax.swing.JFrame {
 
         boolean boolID = false;
 
-        int adminID = (int) spnID.getValue();
-        String password = (String) textPassword.getText();
+        ResultSet rs = connection.getRS();
+
+        String adminID = userName.getText();
+        String password = String.valueOf(textPassword.getPassword());
         String authorisation = "u";
 
         try {
             while (rs.next()) {
                 try {
-                    if (rs.getInt("ID") == adminID && !boolID) {
+                    if (rs.getString("ID").equals(adminID) && !boolID) {
 
                         if (password.equals(rs.getString("Password"))) {
                             boolID = true;
@@ -168,51 +161,54 @@ public class loginScreen extends javax.swing.JFrame {
         try {
 
             if (boolID) {
-                
+
                 if (authorisation.equals("u")){
-                    
+
                     new mainMenu(adminID).setVisible(true);
                     this.dispose();
-                    
+
                 }
-                
+
                 else if(authorisation.equals("a")){
-                    
+
                     new mainMenuAdmin(adminID).setVisible(true);
                     this.dispose();
-                    
-                }                
+
+                }
 
             } else {
-                
+
                 JOptionPane.showMessageDialog(loginScreen.this, "Password incorrect");
 
-                stmt.close();
-                rs.close();
+                connection.closeConnection();
 
                 new loginScreen().setVisible(true);
                 this.dispose();
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-
 
     }//GEN-LAST:event_btnLogInActionPerformed
 
     private void btnNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewUserActionPerformed
-        
+
         this.dispose();
         try {
             new newUser().setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_btnNewUserActionPerformed
+
+    private void userNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userNameActionPerformed
+
+    private void textPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,8 +243,6 @@ public class loginScreen extends javax.swing.JFrame {
 
                 try {
                     new loginScreen().setVisible(true);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
                     Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -262,7 +256,10 @@ public class loginScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnNewUser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JSpinner spnID;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPasswordField textPassword;
+    private javax.swing.JTextField userName;
     // End of variables declaration//GEN-END:variables
 }
